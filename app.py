@@ -5,6 +5,22 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 
 df_car_sales = pd.read_csv('vehicles_us.csv')
+
+df_car_sales['model_year'] = df_car_sales['model_year'].fillna(0)
+df_car_sales['model_year'] = df_car_sales['model_year'].astype('int')
+
+df_car_sales['is_4wd'] = df_car_sales['is_4wd'].fillna(0)
+df_car_sales['is_4wd'] = df_car_sales['is_4wd'].astype('int')
+
+df_car_sales['cylinders'] = df_car_sales['cylinders'].fillna(0)
+df_car_sales['cylinders'] = df_car_sales['cylinders'].astype('int')
+
+df_car_sales['odometer'] = df_car_sales['odometer'].fillna(0)
+df_car_sales['odometer'] = df_car_sales['odometer'].astype('int')
+
+df_car_sales['paint_color'] = df_car_sales['paint_color'].fillna('unknown')
+
+
 st.title('Car Sales')
 st.write('This is a simple example of a Streamlit app. The data below is a dataset showing the sales of cars in the US.)')
 
