@@ -4,7 +4,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import plotly.express as px
 
-df_car_sales = pd.read_csv('/Users/cristinagomez/car_sales/vehicles_us.csv')
+df_car_sales = pd.read_csv('vehicles_us.csv')
 st.title('Car Sales')
 st.write('This is a simple example of a Streamlit app. The data below is a dataset showing the sales of cars in the US.)')
 
