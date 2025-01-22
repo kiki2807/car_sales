@@ -11,6 +11,31 @@ st.write('This is a simple example of a Streamlit app. The data below is a datas
 
 st.dataframe(df_car_sales)
 
+year_checkbox = st.checkbox('Filter by year', value=True)
+if year_checkbox:
+    model_year = st.slider('Year', min_value=1984, max_value=2021, value=(1984, 2021))
+    df_car_sales = df_car_sales[(df_car_sales['model_year'] >= model_year[0]) & (df_car_sales['model_year'] <= model_year[1])]
+    st.dataframe(df_car_sales)
+
+price_checkbox = st.checkbox('Filter by price', value=True)
+if price_checkbox:
+    price = st.slider('Price', min_value=0, max_value=200000, value=(0, 200000))
+    df_car_sales = df_car_sales[(df_car_sales['price'] >= price[0]) & (df_car_sales['price'] <= price[1])]
+    st.dataframe(df_car_sales)
+
+model_checkbox = st.checkbox('Filter by model', value=True)
+if model_checkbox:
+    model = st.multiselect('Model', df_car_sales['model'].unique())
+    df_car_sales = df_car_sales[df_car_sales['model'].isin(model)]
+    st.dataframe(df_car_sales)
+
+condition_checkbox = st.checkbox('Filter by condition', value=True)
+if condition_checkbox:
+    condition = st.multiselect('Condition', df_car_sales['condition'].unique())
+    df_car_sales = df_car_sales[df_car_sales['condition'].isin(condition)]
+    st.dataframe(df_car_sales)
+
+
 st.header('Data Visualization')
 st.subheader('Price Distribution')
 st.write('Below is a histogram showing the distribution of car prices.')
@@ -62,13 +87,11 @@ st.pyplot(fig)
 st.subheader('Model vs Price')
 st.write('Below is a bar chart showing the average price of the cars by model.')
 
-df_grouped = df_no_outliers.groupby('model')['price'].mean().sort_values(ascending=False)
-fig, ax = plt.subplots(figsize=(12, 6))
-df_grouped.plot(kind='bar', color='purple', ax=ax)
-ax.set_title('Model vs Price')
-ax.set_xlabel('Model')
-ax.set_ylabel('Average Price')
-plt.xticks(rotation=90)
+
+df_grouped = df_no_outliers.groupby('model')['price'].mean().reset_index()
+
+fig = px.bar(df_grouped, x='model', y='price', color='price', title='Model vs Price', height=600)
+fig.update_layout(xaxis_title='Model', yaxis_title='Average Price', xaxis_tickangle=-45)
 
 st.plotly_chart(fig)
 
