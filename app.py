@@ -2,7 +2,6 @@ import pandas as pd
 import scipy.stats 
 import streamlit as st 
 import matplotlib.pyplot as plt
-import time
 import plotly.express as px
 
 df_car_sales = pd.read_csv('/Users/cristinagomez/car_sales/vehicles_us.csv')
