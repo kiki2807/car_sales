@@ -20,6 +20,9 @@ df_car_sales['odometer'] = df_car_sales['odometer'].astype('int')
 
 df_car_sales['paint_color'] = df_car_sales['paint_color'].fillna('unknown')
 
+df_car_sales['price'] = pd.to_numeric(df_car_sales['price'], errors='coerce')
+df_car_sales['price'] = df_car_sales['price'].fillna(0)
+
 
 st.title('Car Sales')
 st.write('This is a simple example of a Streamlit app. The data below is a dataset showing the sales of cars in the US.)')
