@@ -21,7 +21,7 @@ df_car_sales['odometer'] = df_car_sales['odometer'].astype('int')
 df_car_sales['paint_color'] = df_car_sales['paint_color'].fillna('unknown')
 
 df_car_sales['price'] = pd.to_numeric(df_car_sales['price'], errors='ignore')
-df_car_sales['price'] = df_car_sales['price'].fillna(0)
+df_car_sales['price'] = df_car_sales['price'].fillna(0).astype(int)
 
 
 st.title('Car Sales')
