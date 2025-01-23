@@ -4,7 +4,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import plotly.express as px
 
-df_car_sales = pd.read_csv('/Users/cristinagomez/car_sales/vehicles_us.csv')
+df_car_sales = pd.read_csv('vehicles_us.csv')
 
 df_car_sales['model_year'] = df_car_sales['model_year'].fillna(0)
 df_car_sales['model_year'] = df_car_sales['model_year'].astype('int')
