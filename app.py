@@ -23,9 +23,6 @@ df_car_sales['odometer'] = df_car_sales['odometer'].astype('int')
 
 df_car_sales['paint_color'] = df_car_sales['paint_color'].fillna('Unknown')
 
-df_car_sales['price'] = pd.to_numeric(df_car_sales['price'], errors='coerce')
-df_car_sales['price'] = df_car_sales['price'].fillna(0).astype(int)
-
 
 st.title('Car Sales')
 st.write('This is a simple example of a Streamlit app. The data below is a dataset showing the sales of cars in the US.)')
@@ -71,9 +68,6 @@ lower_bound = Q1 - 1.5 * IQR
 upper_bound = Q3 + 1.5 * IQR
 
 df_no_outliers = df_car_sales[~((df_car_sales[numeric_cols] < lower_bound) | (df_car_sales[numeric_cols] > upper_bound)).any(axis=1)]
-
-st.write(df_no_outliers.head())
-st.write(df_no_outliers['price'].describe())
 
 fig = px.histogram(df_no_outliers, x='price', nbins=50, title='Price Distribution')
 fig.update_layout(xaxis_title='Price', yaxis_title='Count')
