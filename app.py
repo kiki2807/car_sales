@@ -6,19 +6,20 @@ import plotly.express as px
 
 df_car_sales = pd.read_csv('vehicles_us.csv')
 
-df_car_sales['model_year'] = df_car_sales['model_year'].fillna(0)
+
+df_car_sales['model_year'] = df_car_sales['model_year'].fillna(df_car_sales['model_year'].median())
 df_car_sales['model_year'] = df_car_sales['model_year'].astype('int')
 
-df_car_sales['is_4wd'] = df_car_sales['is_4wd'].fillna(0)
+df_car_sales['is_4wd'] = df_car_sales['is_4wd'].fillna(df_car_sales['is_4wd'].median())
 df_car_sales['is_4wd'] = df_car_sales['is_4wd'].astype('int')
 
-df_car_sales['cylinders'] = df_car_sales['cylinders'].fillna(0)
+df_car_sales['cylinders'] = df_car_sales['cylinders'].fillna(df_car_sales['cylinders'].median())
 df_car_sales['cylinders'] = df_car_sales['cylinders'].astype('int')
 
-df_car_sales['odometer'] = df_car_sales['odometer'].fillna(0)
+df_car_sales['odometer'] = df_car_sales['odometer'].fillna(df_car_sales['odometer'].median())
 df_car_sales['odometer'] = df_car_sales['odometer'].astype('int')
 
-df_car_sales['paint_color'] = df_car_sales['paint_color'].fillna('unknown')
+df_car_sales['paint_color'] = df_car_sales['paint_color'].fillna('Unknown')
 
 df_car_sales['price'] = pd.to_numeric(df_car_sales['price'], errors='ignore')
 df_car_sales['price'] = df_car_sales['price'].fillna(0).astype(int)
