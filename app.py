@@ -70,13 +70,10 @@ upper_bound = Q3 + 1.5 * IQR
 
 df_no_outliers = df_car_sales[~((df_car_sales[numeric_cols] < lower_bound) | (df_car_sales[numeric_cols] > upper_bound)).any(axis=1)]
 
-fig, ax = plt.subplots(figsize=(12, 6))
-df_no_outliers['price'].plot(kind='hist', bins=50, color='orange', ax=ax)
-ax.set_title('Price Distribution')
-ax.set_xlabel('Price')
-plt.xticks(rotation=90)
-
-st.pyplot(fig)
+fig = px.histogram(df_no_outliers, x='price', nbins=50, title='Price Distribution')
+fig.update_layout(xaxis_title='Price', yaxis_title='Count')
+st.plotly_chart(fig)
+   
 
 
 
