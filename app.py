@@ -74,34 +74,19 @@ fig = px.histogram(df_no_outliers, x='price', nbins=50, title='Price Distributio
 fig.update_layout(xaxis_title='Price', yaxis_title='Count')
 st.plotly_chart(fig)
    
-
-
-
 st.subheader('Model Year vs Price')
 st.write('Below is a scatter plot showing the relationship between the model year and the price of the cars.')
 
-fig, ax = plt.subplots()
-ax.scatter(df_no_outliers['model_year'], df_no_outliers['price'], c='green', alpha=0.5, s=10)
-
-ax.set_xlabel('Model Year')
-ax.set_ylabel('Price')
-ax.set_title('Model Year vs Price')
-ax.grid(True)
-
-st.pyplot(fig)
+fig = px.scatter(df_no_outliers, x='model_year', y='price', title='Model Year vs Price', color='price')
+fig.update_layout(xaxis_title='Model Year', yaxis_title='Price')
+st.plotly_chart(fig)
 
 st.subheader('Mileage vs Price')
 st.write('Below is a scatter plot showing the relationship between the mileage and the price of the cars.')
 
-fig, ax = plt.subplots()
-ax.scatter(df_no_outliers['odometer'], df_no_outliers['price'], c='green', alpha=0.5, s=10)
-
-ax.set_xlabel('Mileage')
-ax.set_ylabel('Price')
-ax.set_title('Mileage vs Price')
-ax.grid(True)
-
-st.pyplot(fig)
+fig= px.scatter(df_no_outliers, x='odometer', y='price', title='Mileage vs Price', color='price')
+fig.update_layout(xaxis_title='Mileage', yaxis_title='Price')
+st.plotly_chart(fig)
 
 st.subheader('Model vs Price')
 st.write('Below is a bar chart showing the average price of the cars by model.')
