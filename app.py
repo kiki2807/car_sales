@@ -21,7 +21,7 @@ df_car_sales['odometer'] = df_car_sales['odometer'].astype('int')
 
 df_car_sales['paint_color'] = df_car_sales['paint_color'].fillna('Unknown')
 
-df_car_sales['price'] = pd.to_numeric(df_car_sales['price'], errors='ignore')
+df_car_sales['price'] = pd.to_numeric(df_car_sales['price'], errors='coerce')
 df_car_sales['price'] = df_car_sales['price'].fillna(0).astype(int)
 
 
@@ -69,6 +69,7 @@ lower_bound = Q1 - 1.5 * IQR
 upper_bound = Q3 + 1.5 * IQR
 
 df_no_outliers = df_car_sales[~((df_car_sales[numeric_cols] < lower_bound) | (df_car_sales[numeric_cols] > upper_bound)).any(axis=1)]
+
 fig, ax = plt.subplots(figsize=(12, 6))
 df_no_outliers['price'].plot(kind='hist', bins=50, color='orange', ax=ax)
 ax.set_title('Price Distribution')
@@ -76,6 +77,8 @@ ax.set_xlabel('Price')
 plt.xticks(rotation=90)
 
 st.pyplot(fig)
+
+
 
 st.subheader('Model Year vs Price')
 st.write('Below is a scatter plot showing the relationship between the model year and the price of the cars.')
