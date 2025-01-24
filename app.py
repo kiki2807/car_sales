@@ -64,10 +64,21 @@ Q1 = df_car_sales[numeric_cols].quantile(0.25)
 Q3 = df_car_sales[numeric_cols].quantile(0.75)
 IQR = Q3 - Q1
 
+st.write('Q1:', Q1)
+st.write('Q3:', Q3)
+st.write('IQR:', IQR)
+
 lower_bound = Q1 - 1.5 * IQR
 upper_bound = Q3 + 1.5 * IQR
 
 df_no_outliers = df_car_sales[~((df_car_sales[numeric_cols] < lower_bound) | (df_car_sales[numeric_cols] > upper_bound)).any(axis=1)]
+
+st.write('Number of outliers:', df_car_sales.shape[0] - df_no_outliers.shape[0])
+out_of_bounds = ((df_car_sales[numeric_cols] < lower_bound) | (df_car_sales[numeric_cols] > upper_bound)).any(axis=1)
+st.write(out_of_bounds.sum())
+
+df_no_outliers = df_car_sales[(df_car_sales['price'] >= lower_bound['price']) & (df_car_sales['price'] <= upper_bound['price'])]
+st.write(df_no_outliers)
 
 fig = px.histogram(df_no_outliers, x='price', nbins=50, title='Price Distribution')
 fig.update_layout(xaxis_title='Price', yaxis_title='Count')
