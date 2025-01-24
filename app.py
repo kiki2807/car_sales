@@ -6,8 +6,7 @@ import plotly.express as px
 
 df_car_sales = pd.read_csv('vehicles_us.csv')
 
-st.write(df_no_outliers.head())
-st.write(df_no_outliers['price'].describe())
+
 
 
 df_car_sales['model_year'] = df_car_sales['model_year'].fillna(df_car_sales['model_year'].median())
@@ -72,6 +71,9 @@ lower_bound = Q1 - 1.5 * IQR
 upper_bound = Q3 + 1.5 * IQR
 
 df_no_outliers = df_car_sales[not((df_car_sales[numeric_cols] < lower_bound) | (df_car_sales[numeric_cols] > upper_bound)).any(axis=1)]
+
+st.write(df_no_outliers.head())
+st.write(df_no_outliers['price'].describe())
 
 fig = px.histogram(df_no_outliers, x='price', nbins=50, title='Price Distribution')
 fig.update_layout(xaxis_title='Price', yaxis_title='Count')
